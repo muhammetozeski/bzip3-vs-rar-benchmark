@@ -1,0 +1,12 @@
+# Benchmark inputs and archives - 1.5 GB of third-party binaries, not redistributed
+data/
+out/
+
+# Build products
+*.exe
+*.o
+version_local.h
+
+# bzip3 release tarball and the source tree extracted from it
+src/
+*.tar.gz

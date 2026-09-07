@@ -1,0 +1,32 @@
+==========================================================
+ bzip3 1.5.3 (yerel derleme)  vs  RAR 7.23  -  benchmark
+ Baslangic: 2026-09-07 20:02:03
+==========================================================
+
+### 100mb_cublas64_12.dll   104.883.712 bayt (100.02 MiB)
+  rar -m5 -md1g         48.117.237 bayt  % 45,88      9,25 sn   10,81 MiB/s  (CPU 41,6 sn)
+  bzip3 -b 511          54.105.281 bayt  % 51,59     25,23 sn    3,96 MiB/s  (CPU 25,0 sn)
+  bzip3 -b 32 -j 8      57.574.061 bayt  % 54,89     10,21 sn    9,80 MiB/s  (CPU 28,0 sn)
+
+### 200mb_thunderbird_xul.dll   206.193.280 bayt (196.64 MiB)
+  rar -m5 -md1g         61.391.445 bayt  % 29,77     25,23 sn    7,79 MiB/s  (CPU 131,1 sn)
+  bzip3 -b 511          65.589.667 bayt  % 31,81     42,39 sn    4,64 MiB/s  (CPU 42,0 sn)
+  bzip3 -b 32 -j 8      64.410.018 bayt  % 31,24     13,49 sn   14,57 MiB/s  (CPU 68,8 sn)
+
+### 300mb_vivaldi.dll   315.247.016 bayt (300.64 MiB)
+  rar -m5 -md1g        106.861.003 bayt  % 33,90     54,65 sn    5,50 MiB/s  (CPU 285,2 sn)
+  bzip3 -b 511         106.279.605 bayt  % 33,71     84,30 sn    3,57 MiB/s  (CPU 83,5 sn)
+  bzip3 -b 32 -j 8     107.047.610 bayt  % 33,96     24,65 sn   12,20 MiB/s  (CPU 117,7 sn)
+
+### 400mb_minimax_app.asar   431.096.742 bayt (411.13 MiB)
+  rar -m5 -md1g         47.658.890 bayt  % 11,06     30,72 sn   13,38 MiB/s  (CPU 133,9 sn)
+  bzip3 -b 511          48.364.997 bayt  % 11,22     48,10 sn    8,55 MiB/s  (CPU 47,8 sn)
+  bzip3 -b 32 -j 8      53.932.081 bayt  % 12,51     14,93 sn   27,53 MiB/s  (CPU 71,0 sn)
+
+### 500mb_ggml-cuda.dll   533.257.912 bayt (508.55 MiB)
+  rar -m5 -md1g         94.232.187 bayt  % 17,67     48,56 sn   10,47 MiB/s  (CPU 219,4 sn)
+  bzip3 -b 511          94.599.246 bayt  % 17,74     73,03 sn    6,96 MiB/s  (CPU 72,5 sn)
+  bzip3 -b 32 -j 8     102.171.689 bayt  % 19,16     19,53 sn   26,04 MiB/s  (CPU 110,8 sn)
+
+CSV yazildi: C:\E\Claude\temp\Bzip3Benchmark\sonuclar.csv
+Bitis: 2026-09-07 20:10:57
