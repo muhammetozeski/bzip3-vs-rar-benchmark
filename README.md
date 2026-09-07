@@ -99,6 +99,6 @@ Wall clock, with CPU time of the process in parentheses.
 
 ## Reproducing
 
-`build.ps1` compiles bzip3 from the release tarball; `benchmark.ps1` runs the three configurations over every file in a `data\` directory and writes `sonuclar.csv`. Both are PowerShell 7 and their console output is in Turkish. Point `benchmark.ps1` at your own `data\` directory — the input files themselves are not in this repository, since they are 1.5 GB of third-party binaries.
+`build.ps1` compiles bzip3 from the release tarball; `benchmark.ps1` runs the three configurations over every file in a `data\` directory and writes `result.csv`. Both are PowerShell 7 and their console output is in Turkish. Point `benchmark.ps1` at your own `data\` directory — the input files themselves are not in this repository, since they are 1.5 GB of third-party binaries.
 
-`sonuclar.csv` and `benchmark-log.txt` are the raw output of the run reported above.
+`result.csv` and `benchmark-log.txt` are the raw output of the run reported above.

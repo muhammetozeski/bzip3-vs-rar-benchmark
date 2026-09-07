@@ -5,7 +5,7 @@ $data = Join-Path $root "data"
 $out  = Join-Path $root "out"
 $bz3  = Join-Path $root "bzip3-local.exe"
 $rar  = "C:\E\kp\scoop\apps\winrar\7.23\Rar.exe"
-$csv  = Join-Path $root "sonuclar.csv"
+$csv  = Join-Path $root "result.csv"
 
 New-Item -ItemType Directory -Force $out | Out-Null
 
