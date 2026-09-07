@@ -99,6 +99,16 @@ Wall clock, with CPU time of the process in parentheses.
 
 ## Reproducing
 
-`build.ps1` compiles bzip3 from the release tarball; `benchmark.ps1` runs the three configurations over every file in a `data\` directory and writes `result.csv`. Both are PowerShell 7 and their console output is in Turkish. Point `benchmark.ps1` at your own `data\` directory — the input files themselves are not in this repository, since they are 1.5 GB of third-party binaries.
+Both scripts are PowerShell 7 and take parameters, so nothing is tied to one machine. Their console output is in Turkish.
+
+```powershell
+# Extract the bzip3 1.5.3 release tarball, then build:
+.\build.ps1 -SourceDir .\src\bzip3-1.5.3
+
+# Run the three configurations over every file in a directory:
+.\benchmark.ps1 -DataDir <your-test-files>
+```
+
+`benchmark.ps1` defaults to `.\data` for inputs, `.\out` for the archives it measures and then deletes, `rar` from `PATH`, and the `bzip3-local.exe` that `build.ps1` produced; it writes `result.csv`. The input files are not in this repository — they are 1.5 GB of third-party binaries.
 
 `result.csv` and `benchmark-log.txt` are the raw output of the run reported above.

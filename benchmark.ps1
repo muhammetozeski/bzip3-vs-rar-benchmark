@@ -1,13 +1,19 @@
+param(
+    # Sikistirilacak dosyalarin bulundugu klasor
+    [string]$DataDir = (Join-Path $PSScriptRoot "data"),
+    # Arsivlerin gecici olarak yazilacagi klasor
+    [string]$OutDir = (Join-Path $PSScriptRoot "out"),
+    # RAR calistirilabiliri (PATH uzerinde ise sadece "rar" yeterli)
+    [string]$RarExe = "rar",
+    # bzip3 calistirilabiliri (build.ps1 bunu uretir)
+    [string]$Bzip3Exe = (Join-Path $PSScriptRoot "bzip3-local.exe"),
+    # Sonuc CSV dosyasi
+    [string]$CsvPath = (Join-Path $PSScriptRoot "result.csv")
+)
+
 $ErrorActionPreference = 'Stop'
 
-$root = "C:\E\Claude\temp\Bzip3Benchmark"
-$data = Join-Path $root "data"
-$out  = Join-Path $root "out"
-$bz3  = Join-Path $root "bzip3-local.exe"
-$rar  = "C:\E\kp\scoop\apps\winrar\7.23\Rar.exe"
-$csv  = Join-Path $root "result.csv"
-
-New-Item -ItemType Directory -Force $out | Out-Null
+New-Item -ItemType Directory -Force $OutDir | Out-Null
 
 function Warm-Cache([string]$path) {
     # Dosyayi disk onbellegine al ki olcum CPU'yu olssun, diski degil
@@ -43,7 +49,7 @@ function Invoke-Timed([string]$exe, [string[]]$argList) {
 }
 
 $results = New-Object Collections.Generic.List[object]
-$files = Get-ChildItem -LiteralPath $data -File | Sort-Object Name
+$files = Get-ChildItem -LiteralPath $DataDir -File | Sort-Object Name
 
 Write-Output "=========================================================="
 Write-Output " bzip3 1.5.3 (yerel derleme)  vs  RAR 7.23  -  benchmark"
@@ -57,16 +63,16 @@ foreach ($f in $files) {
     Warm-Cache $f.FullName
 
     $runs = @(
-        @{ Etiket = "rar -m5 -md1g"; Exe = $rar;  Ext = ".rar"
+        @{ Etiket = "rar -m5 -md1g"; Exe = $RarExe;  Ext = ".rar"
            Args = { param($src,$dst) @("a","-m5","-md1g","-ep","-o+","-idq",$dst,$src) } },
-        @{ Etiket = "bzip3 -b 511";  Exe = $bz3;  Ext = ".b511.bz3"
+        @{ Etiket = "bzip3 -b 511";  Exe = $Bzip3Exe;  Ext = ".b511.bz3"
            Args = { param($src,$dst) @("-e","-f","-b","511",$src,$dst) } },
-        @{ Etiket = "bzip3 -b 32 -j 8"; Exe = $bz3; Ext = ".b32j8.bz3"
+        @{ Etiket = "bzip3 -b 32 -j 8"; Exe = $Bzip3Exe; Ext = ".b32j8.bz3"
            Args = { param($src,$dst) @("-e","-f","-b","32","-j","8",$src,$dst) } }
     )
 
     foreach ($r in $runs) {
-        $dst = Join-Path $out ($f.BaseName + $r.Ext)
+        $dst = Join-Path $OutDir ($f.BaseName + $r.Ext)
         if (Test-Path -LiteralPath $dst) { Remove-Item -LiteralPath $dst -Force }
 
         $argList = & $r.Args $f.FullName $dst
@@ -103,6 +109,6 @@ foreach ($f in $files) {
     Write-Output ""
 }
 
-$results | Export-Csv -LiteralPath $csv -NoTypeInformation -Encoding UTF8
-Write-Output "CSV yazildi: $csv"
+$results | Export-Csv -LiteralPath $CsvPath -NoTypeInformation -Encoding UTF8
+Write-Output "CSV yazildi: $(Split-Path -Leaf $CsvPath)"
 Write-Output "Bitis: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"

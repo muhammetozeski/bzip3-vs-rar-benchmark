@@ -28,5 +28,5 @@
   bzip3 -b 511          94.599.246 bayt  % 17,74     73,03 sn    6,96 MiB/s  (CPU 72,5 sn)
   bzip3 -b 32 -j 8     102.171.689 bayt  % 19,16     19,53 sn   26,04 MiB/s  (CPU 110,8 sn)
 
-CSV yazildi: C:\E\Claude\temp\Bzip3Benchmark\sonuclar.csv
+CSV yazildi: result.csv
 Bitis: 2026-09-07 20:10:57
